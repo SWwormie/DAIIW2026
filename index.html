@@ -1,0 +1,649 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102d4f">
+  <title>Data, AI &amp; Innovation Week Stamp Card</title>
+  <style>
+    :root {
+      --navy: #102d4f;
+      --blue: #176bc1;
+      --cyan: #15acc7;
+      --green: #16875d;
+      --gold: #f2c94c;
+      --ink: #14263c;
+      --muted: #68788d;
+      --line: #d7e3ed;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% -10%, #d9f5ff 0, #edf5fb 40%, #f8fafc 100%);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+    }
+
+    button, input { font: inherit; }
+
+    .wrap {
+      width: min(100%, 560px);
+      margin: auto;
+      padding: 18px 15px calc(40px + env(safe-area-inset-bottom));
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #e4edf4;
+      border-radius: 24px;
+      box-shadow: 0 14px 40px rgba(25, 59, 91, .12);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--navy), #13598b 58%, #087fa0);
+      color: #fff;
+      padding: 25px 21px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 175px;
+      height: 175px;
+      border: 32px solid rgba(255, 255, 255, .08);
+      border-radius: 50%;
+      right: -85px;
+      top: -78px;
+    }
+
+    .eyebrow {
+      font-size: .74rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #afeefa;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.62rem, 7vw, 2.05rem);
+      line-height: 1.08;
+      margin: 8px 0;
+    }
+
+    .hero p {
+      margin: 0;
+      line-height: 1.45;
+      color: #e6f7ff;
+    }
+
+    .content { padding: 18px; }
+
+    .progress {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+    }
+
+    .track {
+      height: 10px;
+      border-radius: 99px;
+      background: #e6eef4;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--cyan), #5ac88e);
+      transition: width .5s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .stations {
+      display: grid;
+      gap: 12px;
+    }
+
+    .station {
+      border: 2px dashed #b7c9d8;
+      border-radius: 18px;
+      padding: 15px;
+      background: #fff;
+      transition: .2s;
+    }
+
+    .station-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .seal {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      flex: 0 0 50px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eef3f7;
+      color: #8398aa;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .station-no {
+      font-size: .69rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .station-name {
+      font-weight: 850;
+      font-size: 1.04rem;
+      margin-top: 2px;
+    }
+
+    .station-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .code-input {
+      width: 100%;
+      min-width: 0;
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+      padding: 11px;
+      text-align: center;
+      font-size: 1.08rem;
+      letter-spacing: .25em;
+      outline: none;
+    }
+
+    .code-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(23, 107, 193, .13);
+    }
+
+    .validate {
+      border: 0;
+      border-radius: 11px;
+      padding: 0 15px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .station-msg {
+      min-height: 18px;
+      margin-top: 7px;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .station.done {
+      border-style: solid;
+      border-color: #69cda4;
+      background: linear-gradient(145deg, #fff, #effbf6);
+    }
+
+    .station.done .seal {
+      background: var(--green);
+      color: #fff;
+      animation: stamp .62s cubic-bezier(.18, .9, .22, 1.35);
+    }
+
+    .station.done .seal::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border: 2px solid #45b98b;
+      border-radius: 50%;
+      animation: ripple .9s ease-out;
+    }
+
+    .station.done .station-form { display: none; }
+
+    .station.done .station-msg {
+      color: #14714f;
+      font-weight: 750;
+    }
+
+    .next-step {
+      display: none;
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid #bed9ef;
+      border-radius: 18px;
+      background: #f3f9fe;
+      text-align: center;
+    }
+
+    .next-step.show { display: block; }
+
+    .next-step h2 {
+      font-size: 1.18rem;
+      margin: 0 0 8px;
+    }
+
+    .next-step p {
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0 0 14px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 13px 15px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      margin-top: 10px;
+      background: #e4eef8;
+      color: #174f80;
+    }
+
+    .return-step {
+      display: none;
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .return-step.show { display: block; }
+
+    .phrase-card {
+      display: none;
+      margin-top: 16px;
+      padding: 20px;
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      background: linear-gradient(145deg, #fff5c7, #fff);
+      text-align: center;
+      color: #6a5100;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    .phrase-card.show { display: block; }
+
+    .phrase {
+      margin: 12px 0;
+      padding: 13px 9px;
+      border-radius: 12px;
+      background: #fff;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+      letter-spacing: .02em;
+    }
+
+    .copy-status {
+      min-height: 18px;
+      margin-top: 7px;
+      font-size: .82rem;
+      color: #14714f;
+    }
+
+    .reset {
+      margin-top: 16px;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      text-decoration: underline;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .shake { animation: shake .3s; }
+
+    .confetti {
+      position: fixed;
+      top: -14px;
+      width: 9px;
+      height: 14px;
+      z-index: 20;
+      pointer-events: none;
+      animation: fall 2.6s linear forwards;
+    }
+
+    .note {
+      font-size: .75rem;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 15px 3px 0;
+    }
+
+    @keyframes stamp {
+      0% { transform: scale(2.1) rotate(-18deg); opacity: 0; }
+      65% { transform: scale(.86) rotate(5deg); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes ripple {
+      from { transform: scale(.7); opacity: 1; }
+      to { transform: scale(1.45); opacity: 0; }
+    }
+
+    @keyframes glow {
+      to { box-shadow: 0 0 24px rgba(242, 201, 76, .48); }
+    }
+
+    @keyframes shake {
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    @keyframes fall {
+      to { transform: translateY(105vh) rotate(720deg); opacity: .9; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="panel">
+      <header class="hero">
+        <div class="eyebrow">Explore • Learn • Collect</div>
+        <h1>Data, AI &amp;<br>Innovation Week</h1>
+        <p>Visit each station and enter the four-digit code provided by its station master.</p>
+      </header>
+
+      <section class="content">
+        <div class="progress">
+          <div class="progress-row">
+            <span>Your journey</span>
+            <span id="count">0 / 5</span>
+          </div>
+          <div class="track"><div id="fill" class="fill"></div></div>
+        </div>
+
+        <div id="stations" class="stations"></div>
+
+        <section id="formStep" class="next-step" aria-live="polite">
+          <h2>All five stations completed</h2>
+          <p>Select the button below to open FormsSG in a new browser tab. Return to this page after submitting.</p>
+          <button id="formsButton" class="btn" type="button">Complete the FormsSG form</button>
+
+          <div id="returnStep" class="return-step">
+            <p>Have you completed and submitted the FormsSG form?</p>
+            <button id="submittedButton" class="btn secondary" type="button">I have submitted the form</button>
+          </div>
+        </section>
+
+        <section id="phraseCard" class="phrase-card" aria-live="polite">
+          <div style="font-size:2rem">✅</div>
+          <strong>Completion confirmed</strong>
+          <div id="phrase" class="phrase">Data-AI-Innovation-Week-2026</div>
+          <button id="copyButton" class="btn" type="button">Copy completion phrase</button>
+          <div id="copyStatus" class="copy-status"></div>
+        </section>
+
+        <button id="resetButton" class="reset" type="button">Reset this stamp card</button>
+        <p class="note">Progress is saved in this browser on this device. The confirmation step relies on the participant's declaration because this standalone page cannot read the submission status from FormsSG.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var FORM_URL = 'https://form.gov.sg/6a8fa12558244afc1d4ab1ac';
+      var STATIONS = [
+        { name: 'appCentral', code: '4827' },
+        { name: 'devCentral', code: '6154' },
+        { name: 'draftCentral', code: '2398' },
+        { name: 'genCentral', code: '7541' },
+        { name: 'Innovation Thinking', code: '3816' }
+      ];
+      var STORAGE_KEY = 'daiw-stamp-card-final-v2';
+      var state = loadState();
+
+      var stationsElement = document.getElementById('stations');
+      var countElement = document.getElementById('count');
+      var fillElement = document.getElementById('fill');
+      var formStepElement = document.getElementById('formStep');
+      var formsButtonElement = document.getElementById('formsButton');
+      var returnStepElement = document.getElementById('returnStep');
+      var submittedButtonElement = document.getElementById('submittedButton');
+      var phraseCardElement = document.getElementById('phraseCard');
+      var phraseElement = document.getElementById('phrase');
+      var copyButtonElement = document.getElementById('copyButton');
+      var copyStatusElement = document.getElementById('copyStatus');
+      var resetButtonElement = document.getElementById('resetButton');
+
+      function loadState() {
+        try {
+          var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          if (saved && Array.isArray(saved.completed)) return saved;
+        } catch (error) {}
+        return { completed: [], formOpened: false, formConfirmed: false };
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (error) {}
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (character) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+          }[character];
+        });
+      }
+
+      function render() {
+        stationsElement.innerHTML = STATIONS.map(function (station, index) {
+          var done = state.completed.indexOf(index) > -1;
+          return '<article class="station ' + (done ? 'done' : '') + '" id="station-' + index + '">' +
+            '<div class="station-head">' +
+              '<div class="seal">' + (done ? '✓' : index + 1) + '</div>' +
+              '<div>' +
+                '<div class="station-no">Station ' + (index + 1) + '</div>' +
+                '<div class="station-name">' + escapeHtml(station.name) + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="station-form">' +
+              '<input id="code-' + index + '" class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4-digit code" aria-label="Four-digit code for ' + escapeHtml(station.name) + '">' +
+              '<button class="validate" type="button" data-station="' + index + '">Validate</button>' +
+            '</div>' +
+            '<div id="message-' + index + '" class="station-msg">' + (done ? 'Station completed' : '') + '</div>' +
+          '</article>';
+        }).join('');
+
+        countElement.textContent = state.completed.length + ' / 5';
+        fillElement.style.width = (state.completed.length * 20) + '%';
+
+        var allComplete = state.completed.length === 5;
+        formStepElement.classList.toggle('show', allComplete && !state.formConfirmed);
+        returnStepElement.classList.toggle('show', allComplete && state.formOpened && !state.formConfirmed);
+        phraseCardElement.classList.toggle('show', allComplete && state.formConfirmed);
+
+        Array.prototype.forEach.call(document.querySelectorAll('.validate'), function (button) {
+          button.addEventListener('click', function () {
+            validateStation(Number(button.getAttribute('data-station')));
+          });
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('.code-input'), function (input) {
+          input.addEventListener('input', function () {
+            input.value = input.value.replace(/\D/g, '').slice(0, 4);
+          });
+          input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              validateStation(Number(input.id.split('-')[1]));
+            }
+          });
+        });
+      }
+
+      function validateStation(index) {
+        var input = document.getElementById('code-' + index);
+        var message = document.getElementById('message-' + index);
+        var card = document.getElementById('station-' + index);
+        if (!input || !message || !card) return;
+
+        var value = input.value.replace(/\D/g, '');
+        input.value = value;
+
+        if (value.length !== 4) {
+          showFailure(card, message, 'Enter the four-digit code for this station.');
+          return;
+        }
+
+        if (value !== STATIONS[index].code) {
+          showFailure(card, message, 'Incorrect code for ' + STATIONS[index].name + '.');
+          return;
+        }
+
+        if (state.completed.indexOf(index) === -1) {
+          state.completed.push(index);
+          state.completed.sort(function (a, b) { return a - b; });
+          saveState();
+
+          if (navigator.vibrate) navigator.vibrate([65, 35, 95]);
+
+          var finished = state.completed.length === 5;
+          render();
+
+          if (finished) {
+            celebrate();
+            setTimeout(function () {
+              formStepElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 250);
+          }
+        }
+      }
+
+      function showFailure(card, message, text) {
+        message.textContent = text;
+        card.classList.add('shake');
+        setTimeout(function () { card.classList.remove('shake'); }, 350);
+      }
+
+      formsButtonElement.addEventListener('click', function () {
+        state.formOpened = true;
+        saveState();
+        returnStepElement.classList.add('show');
+        window.open(FORM_URL, '_blank', 'noopener,noreferrer');
+      });
+
+      submittedButtonElement.addEventListener('click', function () {
+        state.formConfirmed = true;
+        saveState();
+        render();
+        setTimeout(function () {
+          phraseCardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      });
+
+      copyButtonElement.addEventListener('click', function () {
+        var text = phraseElement.textContent;
+
+        function copied() {
+          copyStatusElement.textContent = 'Completion phrase copied.';
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(copied).catch(function () {
+            fallbackCopy(text, copied);
+          });
+        } else {
+          fallbackCopy(text, copied);
+        }
+      });
+
+      function fallbackCopy(text, done) {
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+
+        try {
+          document.execCommand('copy');
+          done();
+        } catch (error) {
+          copyStatusElement.textContent = 'Press and hold the phrase above to copy it.';
+        }
+
+        document.body.removeChild(area);
+      }
+
+      resetButtonElement.addEventListener('click', function () {
+        if (window.confirm('Reset all station stamps and the form confirmation on this device?')) {
+          try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
+          state = { completed: [], formOpened: false, formConfirmed: false };
+          render();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      window.addEventListener('pageshow', function () {
+        state = loadState();
+        render();
+      });
+
+      function celebrate() {
+        var colors = ['#15acc7', '#54c494', '#f2c94c', '#176bc1', '#f06e78'];
+        for (var i = 0; i < 45; i++) {
+          var piece = document.createElement('i');
+          piece.className = 'confetti';
+          piece.style.left = Math.random() * 100 + 'vw';
+          piece.style.background = colors[i % colors.length];
+          piece.style.animationDelay = Math.random() * .65 + 's';
+          document.body.appendChild(piece);
+          setTimeout((function (element) {
+            return function () {
+              if (element.parentNode) element.parentNode.removeChild(element);
+            };
+          })(piece), 3400);
+        }
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>
