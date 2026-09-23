@@ -651,7 +651,7 @@
         state.formOpened = true;
         saveState();
         returnStepElement.classList.add('show');
-        window.location.assign(FORM_URL);
+        window.open(FORM_URL, '_blank', 'noopener,noreferrer');
       });
 
       submittedButtonElement.addEventListener('click', function () {
