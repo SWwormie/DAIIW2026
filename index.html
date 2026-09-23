@@ -4,129 +4,202 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#102d4f">
-  <title>Data, AI &amp; Innovation Week Stamp Card</title>
+  <meta name="theme-color" content="#ef476f">
+  <title>Centrals &amp; Innovation Thinking Carnival Stamp Card</title>
   <style>
     :root {
-      --navy: #102d4f;
-      --blue: #176bc1;
-      --cyan: #15acc7;
-      --green: #16875d;
-      --gold: #f2c94c;
-      --ink: #14263c;
-      --muted: #68788d;
-      --line: #d7e3ed;
+      --red: #ef476f;
+      --orange: #ff9f1c;
+      --yellow: #ffd166;
+      --green: #06d6a0;
+      --blue: #118ab2;
+      --purple: #8b5cf6;
+      --ink: #33214f;
+      --muted: #735f82;
+      --cream: #fff8e7;
+      --paper: #ffffff;
+      --line: #ead9c0;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at 50% -10%, #d9f5ff 0, #edf5fb 40%, #f8fafc 100%);
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
       color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 7%, rgba(255, 209, 102, .75) 0 18px, transparent 19px),
+        radial-gradient(circle at 91% 14%, rgba(6, 214, 160, .35) 0 24px, transparent 25px),
+        linear-gradient(135deg, #fff5cf 0%, #ffe7ef 48%, #e7f8ff 100%);
+      background-attachment: fixed;
     }
 
     button, input { font: inherit; }
 
-    .wrap {
-      width: min(100%, 560px);
-      margin: auto;
-      padding: 18px 15px calc(40px + env(safe-area-inset-bottom));
+    .bunting {
+      position: fixed;
+      z-index: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 42px;
+      pointer-events: none;
+      background: repeating-linear-gradient(135deg, var(--red) 0 25px, var(--yellow) 25px 50px, var(--green) 50px 75px, var(--blue) 75px 100px, var(--purple) 100px 125px);
+      clip-path: polygon(0 0, 100% 0, 100% 38%, 96% 95%, 92% 38%, 88% 95%, 84% 38%, 80% 95%, 76% 38%, 72% 95%, 68% 38%, 64% 95%, 60% 38%, 56% 95%, 52% 38%, 48% 95%, 44% 38%, 40% 95%, 36% 38%, 32% 95%, 28% 38%, 24% 95%, 20% 38%, 16% 95%, 12% 38%, 8% 95%, 4% 38%, 0 95%);
     }
 
-    .panel {
-      background: #fff;
-      border: 1px solid #e4edf4;
-      border-radius: 24px;
-      box-shadow: 0 14px 40px rgba(25, 59, 91, .12);
+    .floating {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .34;
+      font-size: 2rem;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .floating.one { left: 3%; top: 18%; }
+    .floating.two { right: 3%; top: 42%; animation-delay: -1.5s; }
+    .floating.three { left: 5%; bottom: 9%; animation-delay: -3s; }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 580px);
+      margin: auto;
+      padding: 58px 15px calc(44px + env(safe-area-inset-bottom));
+    }
+
+    .passport {
       overflow: hidden;
+      border: 4px solid var(--ink);
+      border-radius: 26px;
+      background: var(--cream);
+      box-shadow: 9px 10px 0 rgba(51, 33, 79, .2);
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--navy), #13598b 58%, #087fa0);
+      padding: 29px 21px 27px;
+      text-align: center;
       color: #fff;
-      padding: 25px 21px;
+      background: linear-gradient(120deg, var(--red), var(--orange) 32%, var(--purple) 68%, var(--blue));
     }
 
+    .hero::before,
     .hero::after {
       content: "";
       position: absolute;
-      width: 175px;
-      height: 175px;
-      border: 32px solid rgba(255, 255, 255, .08);
+      width: 130px;
+      height: 130px;
+      border: 20px solid rgba(255,255,255,.13);
       border-radius: 50%;
-      right: -85px;
-      top: -78px;
     }
 
+    .hero::before { left: -75px; top: -65px; }
+    .hero::after { right: -75px; bottom: -70px; }
+
     .eyebrow {
+      display: inline-block;
+      padding: 6px 11px;
+      border: 2px solid rgba(255,255,255,.85);
+      border-radius: 999px;
       font-size: .74rem;
-      letter-spacing: .13em;
+      font-weight: 900;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      color: #afeefa;
-      font-weight: 800;
+      background: rgba(51, 33, 79, .22);
     }
 
     .hero h1 {
-      font-size: clamp(1.62rem, 7vw, 2.05rem);
-      line-height: 1.08;
-      margin: 8px 0;
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 9px;
+      font-size: clamp(1.8rem, 8vw, 2.35rem);
+      line-height: 1.05;
+      text-shadow: 0 3px 0 rgba(51,33,79,.35);
     }
 
     .hero p {
-      margin: 0;
-      line-height: 1.45;
-      color: #e6f7ff;
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: auto;
+      line-height: 1.5;
+      color: #fffdf5;
+      font-weight: 700;
     }
 
     .content { padding: 18px; }
 
+    .passport-label {
+      margin: 0 0 10px;
+      text-align: center;
+      color: var(--red);
+      font-size: 1.03rem;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
     .progress {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 14px;
+      padding: 15px;
+      border: 3px solid var(--ink);
+      border-radius: 17px;
+      background: #fff;
+      box-shadow: 4px 5px 0 rgba(51, 33, 79, .12);
+      margin-bottom: 15px;
     }
 
     .progress-row {
       display: flex;
       justify-content: space-between;
-      font-weight: 800;
+      gap: 12px;
+      align-items: center;
+      font-weight: 900;
     }
 
     .track {
-      height: 10px;
-      border-radius: 99px;
-      background: #e6eef4;
+      height: 13px;
       overflow: hidden;
-      margin-top: 10px;
+      margin-top: 11px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: #f2e9dc;
     }
 
     .fill {
-      height: 100%;
       width: 0;
-      background: linear-gradient(90deg, var(--cyan), #5ac88e);
-      transition: width .5s cubic-bezier(.2, .8, .2, 1);
+      height: 100%;
+      background: repeating-linear-gradient(45deg, var(--red) 0 14px, var(--yellow) 14px 28px, var(--green) 28px 42px, var(--blue) 42px 56px, var(--purple) 56px 70px);
+      transition: width .5s cubic-bezier(.2,.8,.2,1);
     }
 
-    .stations {
-      display: grid;
-      gap: 12px;
+    .stars {
+      margin-top: 9px;
+      text-align: center;
+      letter-spacing: .2em;
+      font-size: 1.35rem;
     }
+
+    .stations { display: grid; gap: 13px; }
 
     .station {
-      border: 2px dashed #b7c9d8;
-      border-radius: 18px;
+      position: relative;
       padding: 15px;
+      border: 3px dashed var(--orange);
+      border-radius: 19px;
       background: #fff;
+      box-shadow: 4px 5px 0 rgba(51,33,79,.1);
       transition: .2s;
     }
+
+    .station:nth-child(2) { border-color: var(--blue); }
+    .station:nth-child(3) { border-color: var(--purple); }
+    .station:nth-child(4) { border-color: var(--green); }
+    .station:nth-child(5) { border-color: var(--red); }
 
     .station-head {
       display: flex;
@@ -136,35 +209,37 @@
 
     .seal {
       position: relative;
-      width: 50px;
-      height: 50px;
-      flex: 0 0 50px;
-      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      flex: 0 0 54px;
       display: grid;
       place-items: center;
-      background: #eef3f7;
-      color: #8398aa;
-      font-size: 23px;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 25px;
       font-weight: 900;
+      box-shadow: 3px 3px 0 rgba(51,33,79,.18);
     }
 
     .station-no {
-      font-size: .69rem;
-      text-transform: uppercase;
-      letter-spacing: .1em;
       color: var(--muted);
-      font-weight: 800;
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
     }
 
     .station-name {
-      font-weight: 850;
-      font-size: 1.04rem;
       margin-top: 2px;
+      font-size: 1.08rem;
+      font-weight: 900;
     }
 
     .station-form {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0,1fr) auto;
       gap: 8px;
       margin-top: 13px;
     }
@@ -172,175 +247,172 @@
     .code-input {
       width: 100%;
       min-width: 0;
-      border: 1.5px solid var(--line);
-      border-radius: 11px;
-      padding: 11px;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      outline: none;
       text-align: center;
       font-size: 1.08rem;
+      font-weight: 900;
       letter-spacing: .25em;
-      outline: none;
+      background: #fffdf6;
     }
 
     .code-input:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(23, 107, 193, .13);
+      box-shadow: 0 0 0 4px rgba(17,138,178,.17);
     }
 
-    .validate {
-      border: 0;
-      border-radius: 11px;
-      padding: 0 15px;
-      background: var(--blue);
+    .validate, .btn {
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--red);
       color: #fff;
-      font-weight: 800;
+      font-weight: 900;
       cursor: pointer;
+      box-shadow: 3px 4px 0 var(--ink);
+      transition: transform .12s, box-shadow .12s;
+    }
+
+    .validate { padding: 0 15px; }
+
+    .validate:active, .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 2px 0 var(--ink);
     }
 
     .station-msg {
       min-height: 18px;
       margin-top: 7px;
-      font-size: .8rem;
       color: var(--muted);
+      font-size: .82rem;
+      font-weight: 700;
     }
 
     .station.done {
       border-style: solid;
-      border-color: #69cda4;
-      background: linear-gradient(145deg, #fff, #effbf6);
+      border-color: var(--green);
+      background: linear-gradient(145deg,#effff9,#fff9cf);
     }
 
     .station.done .seal {
       background: var(--green);
       color: #fff;
-      animation: stamp .62s cubic-bezier(.18, .9, .22, 1.35);
+      animation: stamp .62s cubic-bezier(.18,.9,.22,1.35);
     }
 
     .station.done .seal::after {
       content: "";
       position: absolute;
-      inset: -6px;
-      border: 2px solid #45b98b;
+      inset: -8px;
+      border: 3px solid var(--green);
       border-radius: 50%;
       animation: ripple .9s ease-out;
     }
 
     .station.done .station-form { display: none; }
-
-    .station.done .station-msg {
-      color: #14714f;
-      font-weight: 750;
-    }
+    .station.done .station-msg { color: #08734d; font-weight: 900; }
 
     .next-step {
       display: none;
-      margin-top: 16px;
-      padding: 18px;
-      border: 1px solid #bed9ef;
-      border-radius: 18px;
-      background: #f3f9fe;
+      margin-top: 17px;
+      padding: 20px;
+      border: 3px solid var(--ink);
+      border-radius: 19px;
+      background: linear-gradient(145deg,#fff1ba,#ffe3ee);
       text-align: center;
+      box-shadow: 5px 6px 0 rgba(51,33,79,.15);
     }
 
     .next-step.show { display: block; }
-
-    .next-step h2 {
-      font-size: 1.18rem;
-      margin: 0 0 8px;
-    }
-
-    .next-step p {
-      color: var(--muted);
-      line-height: 1.45;
-      margin: 0 0 14px;
-    }
+    .next-step h2 { margin: 0 0 8px; font-size: 1.3rem; }
+    .next-step p { margin: 0 0 15px; line-height: 1.5; color: var(--muted); font-weight: 700; }
 
     .btn {
       display: block;
       width: 100%;
-      border: 0;
-      border-radius: 13px;
       padding: 13px 15px;
-      background: var(--blue);
-      color: #fff;
-      text-decoration: none;
       text-align: center;
-      font-weight: 850;
-      cursor: pointer;
+      text-decoration: none;
     }
 
-    .btn.secondary {
-      margin-top: 10px;
-      background: #e4eef8;
-      color: #174f80;
-    }
+    .btn.secondary { margin-top: 10px; background: var(--blue); }
 
     .return-step {
       display: none;
-      margin-top: 12px;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 3px dotted rgba(51,33,79,.3);
     }
 
     .return-step.show { display: block; }
 
     .phrase-card {
       display: none;
-      margin-top: 16px;
-      padding: 20px;
-      border: 2px solid var(--gold);
-      border-radius: 18px;
-      background: linear-gradient(145deg, #fff5c7, #fff);
+      margin-top: 17px;
+      padding: 22px 18px;
+      border: 4px solid var(--ink);
+      border-radius: 20px;
+      background: linear-gradient(135deg,var(--yellow),#fff4ba 45%,#ffdcea);
       text-align: center;
-      color: #6a5100;
+      box-shadow: 6px 7px 0 rgba(51,33,79,.16);
       animation: glow 1.5s ease-in-out infinite alternate;
     }
 
     .phrase-card.show { display: block; }
 
     .phrase {
-      margin: 12px 0;
-      padding: 13px 9px;
-      border-radius: 12px;
+      margin: 13px 0;
+      padding: 14px 10px;
+      border: 3px dashed var(--red);
+      border-radius: 13px;
       background: #fff;
+      color: var(--ink);
       font-weight: 900;
-      overflow-wrap: anywhere;
       letter-spacing: .02em;
+      overflow-wrap: anywhere;
     }
 
     .copy-status {
-      min-height: 18px;
-      margin-top: 7px;
-      font-size: .82rem;
-      color: #14714f;
+      min-height: 19px;
+      margin-top: 9px;
+      color: #08734d;
+      font-size: .84rem;
+      font-weight: 900;
     }
 
     .reset {
-      margin-top: 16px;
-      background: transparent;
+      width: 100%;
+      margin-top: 18px;
       border: 0;
+      background: transparent;
       color: var(--muted);
       text-decoration: underline;
-      width: 100%;
       cursor: pointer;
+    }
+
+    .note {
+      margin: 16px 3px 0;
+      color: var(--muted);
+      font-size: .76rem;
+      line-height: 1.48;
+      text-align: center;
     }
 
     .shake { animation: shake .3s; }
 
     .confetti {
       position: fixed;
-      top: -14px;
-      width: 9px;
-      height: 14px;
       z-index: 20;
+      top: -14px;
+      width: 10px;
+      height: 15px;
       pointer-events: none;
       animation: fall 2.6s linear forwards;
     }
 
-    .note {
-      font-size: .75rem;
-      line-height: 1.45;
-      color: var(--muted);
-      margin: 15px 3px 0;
+    @keyframes float {
+      50% { transform: translateY(-13px) rotate(8deg); }
     }
 
     @keyframes stamp {
@@ -355,7 +427,7 @@
     }
 
     @keyframes glow {
-      to { box-shadow: 0 0 24px rgba(242, 201, 76, .48); }
+      to { box-shadow: 0 0 29px rgba(239,71,111,.42), 6px 7px 0 rgba(51,33,79,.16); }
     }
 
     @keyframes shake {
@@ -367,52 +439,68 @@
       to { transform: translateY(105vh) rotate(720deg); opacity: .9; }
     }
 
+    @media (max-width: 370px) {
+      .station-form { grid-template-columns: 1fr; }
+      .validate { min-height: 44px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <div class="bunting"></div>
+  <div class="floating one">🎈</div>
+  <div class="floating two">🎡</div>
+  <div class="floating three">🍿</div>
+
   <div class="wrap">
-    <main class="panel">
+    <main class="passport">
       <header class="hero">
-        <div class="eyebrow">Explore • Learn • Collect</div>
-        <h1>Data, AI &amp;<br>Innovation Week</h1>
-        <p>Visit each station and enter the four-digit code provided by its station master.</p>
+        <div class="eyebrow">🎪 Play • Discover • Collect</div>
+        <h1>Centrals &amp; Innovation Thinking Carnival</h1>
+        <p>Visit each station and collect a secret four-digit code from the station master. Click "Validate" to secure the completion and do not share the code with others! </p>
       </header>
 
       <section class="content">
+        <div class="passport-label">🎟️ Carnival Passport</div>
+
         <div class="progress">
           <div class="progress-row">
-            <span>Your journey</span>
+            <span>Your carnival journey</span>
             <span id="count">0 / 5</span>
           </div>
           <div class="track"><div id="fill" class="fill"></div></div>
+          <div id="stars" class="stars" aria-label="Zero of five stations completed">☆ ☆ ☆ ☆ ☆</div>
         </div>
 
         <div id="stations" class="stations"></div>
 
         <section id="formStep" class="next-step" aria-live="polite">
-          <h2>All five stations completed</h2>
-          <p>Select the button below to open FormsSG in a new browser tab. Return to this page after submitting.</p>
-          <button id="formsButton" class="btn" type="button">Complete the FormsSG form</button>
+          <div style="font-size:2.25rem">🎉</div>
+          <h2>Carnival challenge completed!</h2>
+          <p>You have collected all five digital stamps. Open the FormSG form, submit your event details, then use your browser's Back button to return here.</p>
+          <button id="formsButton" class="btn" type="button">🎪 Open FormSG</button>
 
           <div id="returnStep" class="return-step">
-            <p>Have you completed and submitted the FormsSG form?</p>
-            <button id="submittedButton" class="btn secondary" type="button">I have submitted the form</button>
+            <p>Have you completed and submitted the FormSG?</p>
+            <button id="submittedButton" class="btn secondary" type="button">I have submitted the FormSG</button>
           </div>
         </section>
 
         <section id="phraseCard" class="phrase-card" aria-live="polite">
-          <div style="font-size:2rem">✅</div>
-          <strong>Completion confirmed</strong>
+          <div style="font-size:2.35rem">🏆</div>
+          <h2 style="margin:7px 0">Congratulations!</h2>
+          <div>You have completed the Data, AI &amp; Innovation Week Carnival.</div>
+          <div style="margin-top:13px;font-weight:900">Completion phrase</div>
           <div id="phrase" class="phrase">Data-AI-Innovation-Week-2026</div>
           <button id="copyButton" class="btn" type="button">Copy completion phrase</button>
           <div id="copyStatus" class="copy-status"></div>
         </section>
 
-        <button id="resetButton" class="reset" type="button">Reset this stamp card</button>
-        <p class="note">Progress is saved in this browser on this device. The confirmation step relies on the participant's declaration because this standalone page cannot read the submission status from FormsSG.</p>
+        <button id="resetButton" class="reset" type="button">Reset this carnival passport</button>
+        <p class="note">Progress is saved in this browser on this device. This standalone page cannot read the submission status from FormSG, so the final confirmation relies on the participant's declaration.</p>
       </section>
     </main>
   </div>
@@ -423,18 +511,19 @@
 
       var FORM_URL = 'https://form.gov.sg/6a8fa12558244afc1d4ab1ac';
       var STATIONS = [
-        { name: 'appCentral', code: '4827' },
-        { name: 'devCentral', code: '6154' },
-        { name: 'draftCentral', code: '2398' },
-        { name: 'genCentral', code: '7541' },
-        { name: 'Innovation Thinking', code: '3816' }
+        { name: 'appCentral', code: '4827', icon: '🎈' },
+        { name: 'devCentral', code: '6154', icon: '🤖' },
+        { name: 'draftCentral', code: '2398', icon: '🎨' },
+        { name: 'genCentral', code: '7541', icon: '⚡' },
+        { name: 'Innovation Thinking', code: '3816', icon: '🚀' }
       ];
-      var STORAGE_KEY = 'daiw-stamp-card-final-v2';
+      var STORAGE_KEY = 'daiw-carnival-passport-v1';
       var state = loadState();
 
       var stationsElement = document.getElementById('stations');
       var countElement = document.getElementById('count');
       var fillElement = document.getElementById('fill');
+      var starsElement = document.getElementById('stars');
       var formStepElement = document.getElementById('formStep');
       var formsButtonElement = document.getElementById('formsButton');
       var returnStepElement = document.getElementById('returnStep');
@@ -454,19 +543,15 @@
       }
 
       function saveState() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        } catch (error) {}
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+        catch (error) {}
       }
 
       function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, function (character) {
           return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
+            '&': '&amp;', '<': '&lt;', '>': '&gt;',
+            '"': '&quot;', "'": '&#39;'
           }[character];
         });
       }
@@ -476,22 +561,24 @@
           var done = state.completed.indexOf(index) > -1;
           return '<article class="station ' + (done ? 'done' : '') + '" id="station-' + index + '">' +
             '<div class="station-head">' +
-              '<div class="seal">' + (done ? '✓' : index + 1) + '</div>' +
-              '<div>' +
-                '<div class="station-no">Station ' + (index + 1) + '</div>' +
-                '<div class="station-name">' + escapeHtml(station.name) + '</div>' +
-              '</div>' +
+              '<div class="seal">' + (done ? '✓' : station.icon) + '</div>' +
+              '<div><div class="station-no">Carnival Station ' + (index + 1) + '</div>' +
+              '<div class="station-name">' + escapeHtml(station.name) + '</div></div>' +
             '</div>' +
             '<div class="station-form">' +
-              '<input id="code-' + index + '" class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4-digit code" aria-label="Four-digit code for ' + escapeHtml(station.name) + '">' +
-              '<button class="validate" type="button" data-station="' + index + '">Validate</button>' +
+              '<input id="code-' + index + '" class="code-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="Secret code" aria-label="Four-digit code for ' + escapeHtml(station.name) + '">' +
+              '<button class="validate" type="button" data-station="' + index + '">Validate!</button>' +
             '</div>' +
-            '<div id="message-' + index + '" class="station-msg">' + (done ? 'Station completed' : '') + '</div>' +
+            '<div id="message-' + index + '" class="station-msg">' + (done ? 'Digital stamp collected!' : '') + '</div>' +
           '</article>';
         }).join('');
 
         countElement.textContent = state.completed.length + ' / 5';
         fillElement.style.width = (state.completed.length * 20) + '%';
+        starsElement.textContent = Array.from({ length: 5 }, function (_, index) {
+          return index < state.completed.length ? '★' : '☆';
+        }).join(' ');
+        starsElement.setAttribute('aria-label', state.completed.length + ' of 5 stations completed');
 
         var allComplete = state.completed.length === 5;
         formStepElement.classList.toggle('show', allComplete && !state.formConfirmed);
@@ -527,12 +614,12 @@
         input.value = value;
 
         if (value.length !== 4) {
-          showFailure(card, message, 'Enter the four-digit code for this station.');
+          showFailure(card, message, 'Enter the four-digit secret code for this station.');
           return;
         }
 
         if (value !== STATIONS[index].code) {
-          showFailure(card, message, 'Incorrect code for ' + STATIONS[index].name + '.');
+          showFailure(card, message, 'That code does not match ' + STATIONS[index].name + '. Try again!');
           return;
         }
 
@@ -540,7 +627,6 @@
           state.completed.push(index);
           state.completed.sort(function (a, b) { return a - b; });
           saveState();
-
           if (navigator.vibrate) navigator.vibrate([65, 35, 95]);
 
           var finished = state.completed.length === 5;
@@ -565,7 +651,7 @@
         state.formOpened = true;
         saveState();
         returnStepElement.classList.add('show');
-        window.open(FORM_URL, '_blank', 'noopener,noreferrer');
+        window.location.assign(FORM_URL);
       });
 
       submittedButtonElement.addEventListener('click', function () {
@@ -579,10 +665,7 @@
 
       copyButtonElement.addEventListener('click', function () {
         var text = phraseElement.textContent;
-
-        function copied() {
-          copyStatusElement.textContent = 'Completion phrase copied.';
-        }
+        function copied() { copyStatusElement.textContent = 'Completion phrase copied!'; }
 
         if (navigator.clipboard && window.isSecureContext) {
           navigator.clipboard.writeText(text).then(copied).catch(function () {
@@ -600,19 +683,13 @@
         area.style.opacity = '0';
         document.body.appendChild(area);
         area.select();
-
-        try {
-          document.execCommand('copy');
-          done();
-        } catch (error) {
-          copyStatusElement.textContent = 'Press and hold the phrase above to copy it.';
-        }
-
+        try { document.execCommand('copy'); done(); }
+        catch (error) { copyStatusElement.textContent = 'Press and hold the phrase above to copy it.'; }
         document.body.removeChild(area);
       }
 
       resetButtonElement.addEventListener('click', function () {
-        if (window.confirm('Reset all station stamps and the form confirmation on this device?')) {
+        if (window.confirm('Reset all carnival stamps and the FormSG confirmation on this device?')) {
           try { localStorage.removeItem(STORAGE_KEY); } catch (error) {}
           state = { completed: [], formOpened: false, formConfirmed: false };
           render();
@@ -626,19 +703,19 @@
       });
 
       function celebrate() {
-        var colors = ['#15acc7', '#54c494', '#f2c94c', '#176bc1', '#f06e78'];
-        for (var i = 0; i < 45; i++) {
+        var colors = ['#ef476f','#ff9f1c','#ffd166','#06d6a0','#118ab2','#8b5cf6'];
+        for (var i = 0; i < 55; i++) {
           var piece = document.createElement('i');
           piece.className = 'confetti';
           piece.style.left = Math.random() * 100 + 'vw';
           piece.style.background = colors[i % colors.length];
-          piece.style.animationDelay = Math.random() * .65 + 's';
+          piece.style.animationDelay = Math.random() * .7 + 's';
           document.body.appendChild(piece);
           setTimeout((function (element) {
             return function () {
               if (element.parentNode) element.parentNode.removeChild(element);
             };
-          })(piece), 3400);
+          })(piece), 3500);
         }
       }
 
