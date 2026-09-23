@@ -492,11 +492,9 @@
         <section id="phraseCard" class="phrase-card" aria-live="polite">
           <div style="font-size:2.35rem">🏆</div>
           <h2 style="margin:7px 0">Congratulations!</h2>
-          <div>You have completed the Data, AI &amp; Innovation Week Carnival.</div>
+          <div>Well done! You have completed all the stations!</div>
           <div style="margin-top:13px;font-weight:900">Completion phrase</div>
           <div id="phrase" class="phrase">Data-AI-Innovation-Week-2026</div>
-          <button id="copyButton" class="btn" type="button">Copy completion phrase</button>
-          <div id="copyStatus" class="copy-status"></div>
         </section>
 
         <button id="resetButton" class="reset" type="button">Reset this carnival passport</button>
@@ -529,9 +527,6 @@
       var returnStepElement = document.getElementById('returnStep');
       var submittedButtonElement = document.getElementById('submittedButton');
       var phraseCardElement = document.getElementById('phraseCard');
-      var phraseElement = document.getElementById('phrase');
-      var copyButtonElement = document.getElementById('copyButton');
-      var copyStatusElement = document.getElementById('copyStatus');
       var resetButtonElement = document.getElementById('resetButton');
 
       function loadState() {
@@ -662,31 +657,6 @@
           phraseCardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 100);
       });
-
-      copyButtonElement.addEventListener('click', function () {
-        var text = phraseElement.textContent;
-        function copied() { copyStatusElement.textContent = 'Completion phrase copied!'; }
-
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(text).then(copied).catch(function () {
-            fallbackCopy(text, copied);
-          });
-        } else {
-          fallbackCopy(text, copied);
-        }
-      });
-
-      function fallbackCopy(text, done) {
-        var area = document.createElement('textarea');
-        area.value = text;
-        area.style.position = 'fixed';
-        area.style.opacity = '0';
-        document.body.appendChild(area);
-        area.select();
-        try { document.execCommand('copy'); done(); }
-        catch (error) { copyStatusElement.textContent = 'Press and hold the phrase above to copy it.'; }
-        document.body.removeChild(area);
-      }
 
       resetButtonElement.addEventListener('click', function () {
         if (window.confirm('Reset all carnival stamps and the FormSG confirmation on this device?')) {
